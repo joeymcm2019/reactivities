@@ -2,6 +2,7 @@ import React, {SyntheticEvent, useState} from 'react';
 import { Button, Item, Label, Segment } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
 import { observer } from 'mobx-react-lite';
+import { NavLink } from 'react-router-dom';
 
 export default observer ( function ActivityList() {
 
@@ -12,6 +13,13 @@ export default observer ( function ActivityList() {
   function handleDeleteActivity(event: SyntheticEvent<HTMLButtonElement>, id: string) {
     setTarget(event.currentTarget.name);
     deleteActivity(id);
+  }
+
+  function scrollUp() {
+    window.scroll({
+      top: 0,
+      left: 0,
+    })
   }
 
   return (
@@ -27,7 +35,7 @@ export default observer ( function ActivityList() {
                 <div>{activity.city}, {activity.venue}</div>
               </Item.Description>
               <Item.Extra>
-                <Button onClick={() => activityStore.selectActivity(activity.id)} floated='right' content='View' color='blue' />
+                <Button as={NavLink} to={`/activities/${activity.id}`} onClick={scrollUp} floated='right' content='View' color='blue' />
                 <Button
                   name={activity.id}
                   loading={loading && target === activity.id}

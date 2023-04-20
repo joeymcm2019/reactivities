@@ -56,6 +56,7 @@ export default function ActivityListItem({activity}: Props) {
           color='teal'
           floated='right'
           content='View'
+          onClick={scrollUp}
         />
       </Segment>
     </Segment.Group>
